@@ -27,6 +27,7 @@ class IVPNTexturePacked {
           packed_texture_coordinates(packed_texture_coordinates), packed_texture_index(packed_texture_index),
           texture(texture) {};
     Transform transform;
+    int id = UniqueIDGenerator::generate();
     std::vector<unsigned int> indices;
     std::vector<glm::vec3> xyz_positions;
     std::vector<glm::vec3> normals;
@@ -35,7 +36,7 @@ class IVPNTexturePacked {
     std::string texture;
 };
 
-std::vector<IVPTPRigged> convert_ivpt_to_ivptpr(std::vector<IVPTRigged> &ivptrs, TexturePacker &texture_packer);
+std::vector<IVPNTPRigged> convert_ivpnt_to_ivpntpr(std::vector<IVPNTRigged> &ivptrs, TexturePacker &texture_packer);
 std::vector<IVPTexturePacked> convert_ivpt_to_ivptp(std::vector<IVPTextured> &ivptrs, TexturePacker &texture_packer);
 std::vector<IVPNTexturePacked> convert_ivpnt_to_ivpntp(std::vector<IVPNTextured> &ivptrs,
                                                        TexturePacker &texture_packer);
