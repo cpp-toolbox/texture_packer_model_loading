@@ -18,17 +18,17 @@ std::vector<IVPNTPRigged> convert_ivpnt_to_ivpntpr(std::vector<IVPNTRigged> &ivp
 
 std::vector<IVPTexturePacked> convert_ivpt_to_ivptp(std::vector<IVPTextured> &ivpts, TexturePacker &texture_packer) {
     std::vector<IVPTexturePacked> ivptps = {};
-    for (auto &ivptr : ivpts) {
+    for (auto &ivpt : ivpts) {
         std::vector<glm::vec2> packed_texture_coordinates;
-        for (auto &tc : ivptr.texture_coordinates) {
-            auto ptc = texture_packer.get_packed_texture_coordinate(ivptr.texture_path, tc);
+        for (auto &tc : ivpt.texture_coordinates) {
+            auto ptc = texture_packer.get_packed_texture_coordinate(ivpt.texture_path, tc);
             packed_texture_coordinates.push_back(ptc);
         }
-        int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivptr.texture_path);
+        int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivpt.texture_path);
         int texture_bounding_box_index =
-            texture_packer.get_packed_texture_bounding_box_index_of_texture(ivptr.texture_path);
-        IVPTexturePacked ivptp(ivptr.indices, ivptr.xyz_positions, packed_texture_coordinates, packed_texture_index,
-                               texture_bounding_box_index, ivptr.texture_path);
+            texture_packer.get_packed_texture_bounding_box_index_of_texture(ivpt.texture_path);
+        IVPTexturePacked ivptp(ivpt.indices, ivpt.xyz_positions, ivpt.texture_coordinates, packed_texture_coordinates,
+                               packed_texture_index, texture_bounding_box_index, ivpt.texture_path);
         ivptps.push_back(ivptp);
     }
     return ivptps;
