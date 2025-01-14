@@ -21,12 +21,14 @@ std::vector<IVPTexturePacked> convert_ivpt_to_ivptp(std::vector<IVPTextured> &iv
     for (auto &ivptr : ivpts) {
         std::vector<glm::vec2> packed_texture_coordinates;
         for (auto &tc : ivptr.texture_coordinates) {
-            auto ptc = texture_packer.get_packed_texture_coordinate(ivptr.texture, tc);
+            auto ptc = texture_packer.get_packed_texture_coordinate(ivptr.texture_path, tc);
             packed_texture_coordinates.push_back(ptc);
         }
-        int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivptr.texture);
+        int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivptr.texture_path);
+        int texture_bounding_box_index =
+            texture_packer.get_packed_texture_bounding_box_index_of_texture(ivptr.texture_path);
         IVPTexturePacked ivptp(ivptr.indices, ivptr.xyz_positions, packed_texture_coordinates, packed_texture_index,
-                               ivptr.texture);
+                               texture_bounding_box_index, ivptr.texture_path);
         ivptps.push_back(ivptp);
     }
     return ivptps;
@@ -36,14 +38,14 @@ std::vector<IVPNTexturePacked> convert_ivpnt_to_ivpntp(std::vector<IVPNTextured>
                                                        TexturePacker &texture_packer) {
     std::vector<IVPNTexturePacked> ivpntps = {};
     for (auto &ivpnt : ivpnts) {
-        std::vector<glm::vec2> packed_texture_coordinates;
-        for (auto &tc : ivpnt.texture_coordinates) {
-            auto ptc = texture_packer.get_packed_texture_coordinate(ivpnt.texture, tc);
-            packed_texture_coordinates.push_back(ptc);
-        }
-        int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivpnt.texture);
-        IVPNTexturePacked ivpntp(ivpnt.indices, ivpnt.xyz_positions, ivpnt.normals, packed_texture_coordinates,
-                                 packed_texture_index, ivpnt.texture);
+        std::vector<glm::vec2> packed_texture_coordinates =
+            texture_packer.get_packed_texture_coordinates(ivpnt.texture_path, ivpnt.texture_coordinates);
+        int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivpnt.texture_path);
+        int texture_bounding_box_index =
+            texture_packer.get_packed_texture_bounding_box_index_of_texture(ivpnt.texture_path);
+        IVPNTexturePacked ivpntp(ivpnt.indices, ivpnt.xyz_positions, ivpnt.normals, ivpnt.texture_coordinates,
+                                 packed_texture_coordinates, packed_texture_index, texture_bounding_box_index,
+                                 ivpnt.texture_path);
         ivpntps.push_back(ivpntp);
     }
     return ivpntps;
