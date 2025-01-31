@@ -5,12 +5,12 @@ std::vector<IVPNTPRigged> convert_ivpnt_to_ivpntpr(std::vector<IVPNTRigged> &ivp
     for (auto &ivpntr : ivptrs) {
         std::vector<glm::vec2> packed_texture_coordinates;
         for (auto &tc : ivpntr.texture_coordinates) {
-            auto ptc = texture_packer.get_packed_texture_coordinate(ivpntr.texture, tc);
+            auto ptc = texture_packer.get_packed_texture_coordinate(ivpntr.texture_path, tc);
             packed_texture_coordinates.push_back(ptc);
         }
-        int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivpntr.texture);
+        int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivpntr.texture_path);
         IVPNTPRigged ivpntpr(ivpntr.indices, ivpntr.xyz_positions, ivpntr.normals, packed_texture_coordinates,
-                             packed_texture_index, ivpntr.texture, ivpntr.bone_data);
+                             packed_texture_index, ivpntr.texture_path, ivpntr.bone_data);
         ivpntprs.push_back(ivpntpr);
     }
     return ivpntprs;
