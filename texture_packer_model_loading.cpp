@@ -1,5 +1,7 @@
 #include "texture_packer_model_loading.hpp"
 
+namespace texture_packer_model_loading {
+
 std::vector<IVPNTPRigged> convert_ivpnt_to_ivpntpr(std::vector<IVPNTRigged> &ivptrs, TexturePacker &texture_packer) {
     std::vector<IVPNTPRigged> ivpntprs = {};
     for (auto &ivpntr : ivptrs) {
@@ -52,3 +54,4 @@ std::vector<draw_info::IVPNTexturePacked> convert_ivpnt_to_ivpntp(std::vector<dr
     }
     return ivpntps;
 }
+} // namespace texture_packer_model_loading
