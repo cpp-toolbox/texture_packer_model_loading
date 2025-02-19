@@ -2,8 +2,9 @@
 
 namespace texture_packer_model_loading {
 
-std::vector<IVPNTPRigged> convert_ivpnt_to_ivpntpr(std::vector<IVPNTRigged> &ivptrs, TexturePacker &texture_packer) {
-    std::vector<IVPNTPRigged> ivpntprs = {};
+std::vector<rigged_model_loading::IVPNTPRigged>
+convert_ivpnt_to_ivpntpr(std::vector<rigged_model_loading::IVPNTRigged> &ivptrs, TexturePacker &texture_packer) {
+    std::vector<rigged_model_loading::IVPNTPRigged> ivpntprs = {};
     for (auto &ivpntr : ivptrs) {
         std::vector<glm::vec2> packed_texture_coordinates;
         for (auto &tc : ivpntr.texture_coordinates) {
@@ -11,8 +12,9 @@ std::vector<IVPNTPRigged> convert_ivpnt_to_ivpntpr(std::vector<IVPNTRigged> &ivp
             packed_texture_coordinates.push_back(ptc);
         }
         int packed_texture_index = texture_packer.get_packed_texture_index_of_texture(ivpntr.texture_path);
-        IVPNTPRigged ivpntpr(ivpntr.indices, ivpntr.xyz_positions, ivpntr.normals, packed_texture_coordinates,
-                             packed_texture_index, ivpntr.texture_path, ivpntr.bone_data);
+        rigged_model_loading::IVPNTPRigged ivpntpr(ivpntr.indices, ivpntr.xyz_positions, ivpntr.normals,
+                                                   packed_texture_coordinates, packed_texture_index,
+                                                   ivpntr.texture_path, ivpntr.bone_data);
         ivpntprs.push_back(ivpntpr);
     }
     return ivpntprs;
