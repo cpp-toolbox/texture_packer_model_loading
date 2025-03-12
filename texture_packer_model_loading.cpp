@@ -3,7 +3,7 @@
 namespace texture_packer_model_loading {
 
 std::vector<rigged_model_loading::IVPNTPRigged>
-convert_ivpnt_to_ivpntpr(std::vector<rigged_model_loading::IVPNTRigged> &ivptrs, TexturePacker &texture_packer) {
+convert_ivpntr_to_ivpntpr(std::vector<rigged_model_loading::IVPNTRigged> &ivptrs, TexturePacker &texture_packer) {
     std::vector<rigged_model_loading::IVPNTPRigged> ivpntprs = {};
     for (auto &ivpntr : ivptrs) {
         std::vector<glm::vec2> packed_texture_coordinates;
