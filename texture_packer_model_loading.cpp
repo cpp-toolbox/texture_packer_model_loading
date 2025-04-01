@@ -58,4 +58,21 @@ std::vector<draw_info::IVPNTexturePacked> convert_ivpnt_to_ivpntp(std::vector<dr
     }
     return ivpntps;
 }
+
+draw_info::TransformedIVPTPGroup parse_model_into_tig(ResourcePath &rp, const std::string &model_path,
+                                                      TexturePacker &texture_packer,
+                                                      UniqueIDGenerator &object_id_generator,
+                                                      BoundedUniqueIDGenerator &ltw_object_id_generator) {
+
+    std::vector<draw_info::IVPTextured> ivps =
+        model_loading::parse_model_into_ivpts(rp.gfps(model_path), object_id_generator);
+
+    std::vector<draw_info::IVPTexturePacked> ivpts =
+        texture_packer_model_loading::convert_ivpt_to_ivptp(ivps, texture_packer);
+
+    draw_info::TransformedIVPTPGroup tig(ivpts, ltw_object_id_generator.get_id());
+
+    return tig;
+}
+
 } // namespace texture_packer_model_loading
