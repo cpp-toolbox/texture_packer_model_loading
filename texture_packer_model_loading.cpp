@@ -36,7 +36,7 @@ std::vector<draw_info::IVPTexturePacked> convert_ivpt_to_ivptp(std::vector<draw_
             texture_packer.get_packed_texture_bounding_box_index_of_texture(ivpt.texture_path);
         draw_info::IVPTexturePacked ivptp(ivpt.indices, ivpt.xyz_positions, ivpt.texture_coordinates,
                                           packed_texture_coordinates, packed_texture_index, texture_bounding_box_index,
-                                          ivpt.texture_path, ivpt.id);
+                                          ivpt.texture_path, ivpt.id, ivpt.name);
         ivptps.push_back(ivptp);
     }
     return ivptps;

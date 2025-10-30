@@ -13,15 +13,18 @@ std::vector<draw_info::IVPNTexturePacked> convert_ivpnt_to_ivpntp(std::vector<dr
                                                                   TexturePacker &texture_packer);
 
 /**
-*
-* @pre assumes that all used textures have already been packed using the texture packer
-*
-* @brief loads in a model with textures with data to integrate into texture packer shaders
-*
-* @todo remove these object id generators, I don't believe they're required anymore because my drawing system
-*will automatically assign an object id of one doesn't have one, but then again I need to think about this because we
-haven't yet figured out the whole dual id problem with the object id vs the ltw object id etc...
-*/
+ *
+ * @pre assumes that all used textures have already been packed using the texture packer
+ *
+ * @brief loads in a model with textures with data to integrate into texture packer shaders
+ *
+ * @todo remove these object id generators, I don't believe they're required anymore because my drawing system
+ * will automatically assign an object id of one doesn't have one, but then again I need to think about this because
+ * we haven't yet figured out the whole dual id problem with the object id vs the ltw object id etc...
+ *
+ * I think those changes are in the lod system or something, gotta look again
+ *
+ */
 draw_info::TransformedIVPTPGroup parse_model_into_tig(ResourcePath &rp, const std::string &model_path,
                                                       TexturePacker &texture_packer,
                                                       UniqueIDGenerator &object_id_generator,
